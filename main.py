@@ -1,4 +1,5 @@
 import pygame
+import mouse_position
 
 # pygame setup
 pygame.init()
@@ -8,6 +9,7 @@ running = True
 dt = 0
 
 player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+p1 = mouse_position.Mouse_position()
 
 while running:
     # poll for events
@@ -15,7 +17,9 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
+        if event.type == pygame.MOUSEBUTTONUP:
+            p1.position = (pygame.mouse.get_pos())
+            print(p1.squares(), p1.position)
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("purple")
     pygame.draw.line(screen, "black", (200, 0), (200, 600), 10)
@@ -23,9 +27,9 @@ while running:
     pygame.draw.line(screen, "black", (0, 200), (600, 200), 10)
     pygame.draw.line(screen, "black", (0, 400), (600, 400), 10)
 
-    x = pygame.event.get()
 
-    print(x)
+
+
 
 
     keys = pygame.key.get_pressed()
