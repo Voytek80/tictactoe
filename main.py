@@ -1,5 +1,5 @@
 import pygame
-import mouse_position
+import logic
 
 # pygame setup
 pygame.init()
@@ -9,38 +9,45 @@ running = True
 dt = 0
 
 player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
-p1 = mouse_position.Mouse_position()
+p1 = logic.Mouse_position()
 
 while running:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        if event.type == pygame.MOUSEBUTTONUP:
-            p1.position = (pygame.mouse.get_pos())
-            print(p1.squares(), p1.position)
-    # fill the screen with a color to wipe away anything from last frame
     screen.fill("purple")
     pygame.draw.line(screen, "black", (200, 0), (200, 600), 10)
     pygame.draw.line(screen, "black", (400, 0), (400, 600), 10)
     pygame.draw.line(screen, "black", (0, 200), (600, 200), 10)
     pygame.draw.line(screen, "black", (0, 400), (600, 400), 10)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.MOUSEBUTTONUP:
+            p1.position = (pygame.mouse.get_pos())
+            p1.squares()
+            p1.computers_move()
 
 
 
 
 
 
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_w]:
-        player_pos.y -= 300 * dt
-    if keys[pygame.K_s]:
-        player_pos.y += 300 * dt
-    if keys[pygame.K_a]:
-        player_pos.x -= 300 * dt
-    if keys[pygame.K_d]:
-        player_pos.x += 300 * dt
+    for i, j in enumerate(p1.square):
+        if j == 1:
+            a1, a2 = p1.draw_x_coordinates(i)
+            b1, b2 = a1
+            c1, c2 = a2
+            pygame.draw.line(screen, "black", b1, b2, 10)
+            pygame.draw.line(screen, "black", c1, c2, 10)
+
+
+
+
+
+
+
+
+
 
 
     # flip() the display to put your work on screen
