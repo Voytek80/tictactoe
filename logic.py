@@ -9,26 +9,57 @@ class Mouse_position:
 
 
 
+
     def squares(self):              # define which square was clicked
         self.x, self.y = self.position
+        self.valid_move = 1
         if (self.x < 200 and self.y < 200):
-            self.square[0] = 1
+            if self.square[0] == 0:
+                self.square[0] = 1
+            else:
+                self.valid_move = 0
         elif (self.x < 400 and self.y < 200):
-            self.square[1] = 1
+            if self.square[1] == 0:
+                self.square[1] = 1
+            else:
+                self.valid_move = 0
         elif (self.x < 600 and self.y < 200):
-            self.square[2] = 1
+            if self.square[2] == 0:
+                self.square[2] = 1
+            else:
+                self.valid_move = 0
         elif (self.x < 200 and self.y < 400):
-            self.square[3] = 1
+            if self.square[3] == 0:
+                self.square[3] = 1
+            else:
+                self.valid_move = 0
         elif (self.x < 400 and self.y < 400):
-            self.square[4] = 1
+            if self.square[4] == 0:
+                self.square[4] = 1
+            else:
+                self.valid_move = 0
         elif (self.x < 600 and self.y < 400):
-            self.square[5] = 1
+            if self.square[5] == 0:
+                self.square[5] = 1
+            else:
+                self.valid_move = 0
         elif (self.x < 200 and self.y < 600):
-            self.square[6] = 1
+            if self.square[6] == 0:
+                self.square[6] = 1
+            else:
+                self.valid_move = 0
         elif (self.x < 400 and self.y < 600):
-            self.square[7] = 1
+            if self.square[7] == 0:
+                self.square[7] = 1
+            else:
+                self.valid_move = 0
         elif (self.x < 600 and self.y < 600):
-            self.square[8] = 1
+            if self.square[8] == 0:
+                self.square[8] = 1
+            else:
+                self.valid_move = 0
+
+        print(self.valid_move)
 
     def draw_x_coordinates(self, sq):
         if sq == 0:
@@ -52,9 +83,12 @@ class Mouse_position:
 
     def computers_move(self):
         if_empty = 1
+        random_computer_move = 0
         while if_empty != 0:
             random_computer_move = random.randrange(len(self.square))
-            print(random_computer_move)
+
             if_empty = self.square[random_computer_move]
-            print(if_empty)
+
+        self.square[random_computer_move] = 2
+        print(self.square)
 

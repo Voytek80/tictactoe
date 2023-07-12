@@ -25,7 +25,8 @@ while running:
         if event.type == pygame.MOUSEBUTTONUP:
             p1.position = (pygame.mouse.get_pos())
             p1.squares()
-            p1.computers_move()
+            if p1.valid_move:
+                p1.computers_move()
 
 
 
