@@ -1,10 +1,16 @@
 import random
+import pygame
 
 
 class Mouse_position:
     def __init__(self):
         self.position = (0,0)
         self.square = [0] * 9       # list of all the squares in the game
+        self.positions_of_O = [(100, 100), (300, 100), (500, 100),
+                               (100, 300), (300, 300), (500, 300),
+                               (100, 500), (300, 500), (500, 500)]
+        self.screen = pygame.display.set_mode((600, 600))
+        self.valid_move = 0
 
 
 
@@ -59,7 +65,7 @@ class Mouse_position:
             else:
                 self.valid_move = 0
 
-        print(self.valid_move)
+
 
     def draw_x_coordinates(self, sq):
         if sq == 0:
@@ -86,9 +92,62 @@ class Mouse_position:
         random_computer_move = 0
         while if_empty != 0:
             random_computer_move = random.randrange(len(self.square))
-
             if_empty = self.square[random_computer_move]
-
         self.square[random_computer_move] = 2
-        print(self.square)
+
+    def check_if_win(self):
+        if (self.square[0] == self.square[1] == self.square[2]) and self.square[0] != 0:
+            pygame.draw.line(self.screen, "black", (100, 100), (500, 100), 10)
+            self.end_game()
+        elif self.square[3] == self.square[4] == self.square[5] and self.square[3] != 0:
+            pygame.draw.line(self.screen, "black", (100, 300), (500, 200), 10)
+            self.end_game()
+        elif self.square[6] == self.square[7] == self.square[8] and self.square[6] != 0:
+            pygame.draw.line(self.screen, "black", (100, 500), (500, 500), 10)
+            self.end_game()
+        elif self.square[0] == self.square[3] == self.square[6] and self.square[0] != 0:
+            pygame.draw.line(self.screen, "black", (100, 100), (100, 500), 10)
+            self.end_game()
+        elif self.square[1] == self.square[4] == self.square[7] and self.square[1] != 0:
+            pygame.draw.line(self.screen, "black", (300, 100), (300, 500), 10)
+            self.end_game()
+        elif self.square[2] == self.square[5] == self.square[8] and self.square[2] != 0:
+            pygame.draw.line(self.screen, "black", (500, 100), (500, 500), 10)
+            self.end_game()
+        elif self.square[0] == self.square[4] == self.square[8] and self.square[0] != 0:
+            pygame.draw.line(self.screen, "black", (100, 100), (500, 500), 10)
+            self.end_game()
+        elif self.square[2] == self.square[4] == self.square[6] and self.square[2] != 0:
+            pygame.draw.line(self.screen, "black", (500, 100), (100, 500), 10)
+            self.end_game()
+
+    def end_game(self):
+        pygame.display.flip()
+        pygame.time.wait(3000)
+        self.screen.fill("cyan")
+        my_font = pygame.font.SysFont('Comic Sans MS', 30)
+        text_surface = my_font.render('Some Text', False, (0, 0, 0))
+        self.screen.blit(text_surface, (0, 0))
+
+
+
+    def draw_board(self):
+        pygame.draw.line(self.screen, "black", (200, 0), (200, 600), 10)
+        pygame.draw.line(self.screen, "black", (400, 0), (400, 600), 10)
+        pygame.draw.line(self.screen, "black", (0, 200), (600, 200), 10)
+        pygame.draw.line(self.screen, "black", (0, 400), (600, 400), 10)
+
+    def drawXO(self):
+        for i, j in enumerate(self.square):
+            if j == 1:
+                a1, a2 = self.draw_x_coordinates(i)
+                b1, b2 = a1
+                c1, c2 = a2
+                pygame.draw.line(self.screen, "black", b1, b2, 10)
+                pygame.draw.line(self.screen, "black", c1, c2, 10)
+            elif j == 2:
+                pygame.draw.circle(self.screen, "black", self.positions_of_O[i], 80, 10)
+
+
+
 

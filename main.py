@@ -3,52 +3,38 @@ import logic
 
 # pygame setup
 pygame.init()
-screen = pygame.display.set_mode((600, 600))
+p1 = logic.Mouse_position()
 clock = pygame.time.Clock()
 running = True
 dt = 0
+pygame.display.set_caption('Tic Tac Toe')
 
-player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
-p1 = logic.Mouse_position()
+player_pos = pygame.Vector2(p1.screen.get_width() / 2, p1.screen.get_height() / 2)
+
 
 while running:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
-    screen.fill("purple")
-    pygame.draw.line(screen, "black", (200, 0), (200, 600), 10)
-    pygame.draw.line(screen, "black", (400, 0), (400, 600), 10)
-    pygame.draw.line(screen, "black", (0, 200), (600, 200), 10)
-    pygame.draw.line(screen, "black", (0, 400), (600, 400), 10)
+    p1.screen.fill("cyan")
+    p1.draw_board()
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEBUTTONUP:
             p1.position = (pygame.mouse.get_pos())
-            p1.squares()
-            if p1.valid_move:
-                p1.computers_move()
+            p1.squares()                                #which square was clicked
+            #if p1.valid_move:
+                #p1.check_if_win()
+                #p1.computers_move()
+                #p1.check_if_win()
 
-
-
-
-
-
-    for i, j in enumerate(p1.square):
-        if j == 1:
-            a1, a2 = p1.draw_x_coordinates(i)
-            b1, b2 = a1
-            c1, c2 = a2
-            pygame.draw.line(screen, "black", b1, b2, 10)
-            pygame.draw.line(screen, "black", c1, c2, 10)
-
-
-
-
-
-
-
-
-
+    p1.drawXO()
+    if p1.valid_move == 1:
+        p1.check_if_win()
+        p1.computers_move()
+        p1.check_if_win()
+        p1.valid_move = 0
 
 
     # flip() the display to put your work on screen
@@ -60,3 +46,4 @@ while running:
     dt = clock.tick(60) / 1000
 
 pygame.quit()
+
