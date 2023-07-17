@@ -69,23 +69,23 @@ class Mouse_position:
 
     def draw_x_coordinates(self, sq):
         if sq == 0:
-            return (((20, 20), (180, 180)), ((180, 20), (20, 180)))
+            return (((30, 30), (170, 170)), ((170, 30), (30, 170)))
         if sq == 1:
-            return (((220, 20), (380, 180)), ((380, 20), (220, 180)))
+            return (((230, 30), (370, 170)), ((370, 30), (230, 170)))
         if sq == 2:
-            return (((420, 20), (580, 180)), ((580, 20), (420, 180)))
+            return (((430, 30), (570, 170)), ((570, 30), (430, 170)))
         if sq == 3:
-            return (((20, 220), (180, 380)), ((180,220), (20, 380)))
+            return (((30, 230), (170, 370)), ((170,230), (30, 370)))
         if sq == 4:
-            return (((220, 220), (380, 380)), ((380, 220), (220, 380)))
+            return (((230, 230), (370, 370)), ((370, 230), (230, 370)))
         if sq == 5:
-            return (((420, 220), (580, 380)), ((580, 220), (420, 380)))
+            return (((430, 230), (570, 370)), ((570, 230), (430, 370)))
         if sq == 6:
-            return (((20, 420), (180, 580)), ((180, 420), (20, 580)))
+            return (((30, 430), (170, 570)), ((170, 430), (30, 570)))
         if sq == 7:
-            return (((220, 420), (380, 580)), ((380, 420), (220, 580)))
+            return (((230, 430), (370, 570)), ((370, 430), (230, 570)))
         if sq == 8:
-            return (((420, 420), (580, 580)), ((580, 420), (420, 580)))
+            return (((430, 430), (570, 570)), ((570, 430), (430, 570)))
 
     def computers_move(self):
         if_empty = 1
@@ -132,10 +132,10 @@ class Mouse_position:
 
 
     def draw_board(self):
-        pygame.draw.line(self.screen, "black", (200, 0), (200, 600), 10)
-        pygame.draw.line(self.screen, "black", (400, 0), (400, 600), 10)
-        pygame.draw.line(self.screen, "black", (0, 200), (600, 200), 10)
-        pygame.draw.line(self.screen, "black", (0, 400), (600, 400), 10)
+        pygame.draw.line(self.screen, (0, 153, 153), (200, 0), (200, 600), 10)
+        pygame.draw.line(self.screen, (0, 153, 153), (400, 0), (400, 600), 10)
+        pygame.draw.line(self.screen, (0, 153, 153), (0, 200), (600, 200), 10)
+        pygame.draw.line(self.screen, (0, 153, 153), (0, 400), (600, 400), 10)
 
     def drawXO(self):
         for i, j in enumerate(self.square):
@@ -143,10 +143,10 @@ class Mouse_position:
                 a1, a2 = self.draw_x_coordinates(i)
                 b1, b2 = a1
                 c1, c2 = a2
-                pygame.draw.line(self.screen, "black", b1, b2, 10)
-                pygame.draw.line(self.screen, "black", c1, c2, 10)
+                pygame.draw.line(self.screen, (64, 64, 64), b1, b2, 10)
+                pygame.draw.line(self.screen, (64, 64, 64), c1, c2, 10)
             elif j == 2:
-                pygame.draw.circle(self.screen, "black", self.positions_of_O[i], 80, 10)
+                pygame.draw.circle(self.screen, (255, 255, 255), self.positions_of_O[i], 70, 10)
 
 
 
